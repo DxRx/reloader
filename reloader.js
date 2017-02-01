@@ -34,6 +34,7 @@ Reloader = {
     // with the server if we still have a valid cached copy. This doesn't work
     // when the location contains a hash however, because that wouldn't reload
     // the page and just scroll to the hash location instead.
+    switchPendingVersion();
     if (window.location.hash || window.location.href.endsWith("#")) {
       window.location.reload();
     } else {
@@ -231,3 +232,22 @@ Template.registerHelper("updateAvailable", function() {
 $(document).on('click', '[reloader-update]', function(event) {
   Reloader.reload();
 });
+
+function switchPendingVersion() {
+  if (Meteor.isCordova) {
+    if (WebAppLocalServer) {
+      enhanceWebAppLocalServer();
+      WebAppLocalServer.switchPendingVersion();
+    }
+  }
+}
+
+function enhanceWebAppLocalServer() {
+  if (WebAppLocalServer) {
+    if (!WebAppLocalServer.switchPendingVersion) {
+      WebAppLocalServer.switchPendingVersion = function(callback) {
+        cordova.exec(callback, console.error, 'WebAppLocalServer', 'switchPendingVersion', []);
+      };
+    }
+  }
+}
