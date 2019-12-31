@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'jamielob:reloader',
+  name: 'dxrx:reloader',
   version: '1.3.0',
   summary: 'More control over hot code push reloading',
-  git: 'https://github.com/jamielob/reloader/',
+  git: 'https://github.com/dxrx/reloader/',
   documentation: 'README.md'
 });
 
@@ -36,7 +36,7 @@ Npm.depends({
 });
 
 Package.onTest(function(api) {
-  api.use('jamielob:reloader', 'client')
+  api.use('dxrx:reloader', 'client')
 
   api.use(['ecmascript',
            'underscore',
