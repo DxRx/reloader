@@ -20,7 +20,7 @@ Reloader = {
 
   prereload() {
     // Show the splashscreen
-    navigator.splashscreen.show();
+    if (navigator && navigator.splashscreen) navigator.splashscreen.show();
 
     // Set the refresh flag
     localStorage.setItem('reloaderWasRefreshed', Date.now());
@@ -94,7 +94,7 @@ Reloader = {
         }
 
         launchScreen.release();
-        navigator.splashscreen.hide();
+        if (navigator && navigator.splashscreen) navigator.splashscreen.hide();
 
       }
 
@@ -149,7 +149,7 @@ Reloader = {
 
     if (shouldCheck) {
 
-      navigator.splashscreen.show();
+      if (navigator && navigator.splashscreen) navigator.splashscreen.show();
 
       this._checkForUpdate();
 
